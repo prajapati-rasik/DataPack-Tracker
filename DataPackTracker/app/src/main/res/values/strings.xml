@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">DataPack Tracker</string>
+    <string name="hint_register">create account</string>
+    <string name="register">Register</string>
+    <string name="signin">SignIn</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="forgott_password">forgot password</string>
+    <string name="login">Login</string>
+    <string name="do_not_have_an_account">do not have an account?</string>
+    <string name="todo">todo</string>
+    <string name="signup">SignUp</string>
+    <string name="phone_number">phone number</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="registration">Register</string>
+    <string name="go_to_login_page">Go to Login page</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="email">Email</string>
+    <string name="forgot_password_msg">We just need your registered Email id to sent you password reset instructions</string>
+    <string name="reset_password">reset password</string>
+    <string name="back">back</string>
+    <string name="signout">SignOut</string>
 </resources>
