@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "314829463261",
+    "firebase_url": "https://datapack-tracker-9c428.firebaseio.com",
+    "project_id": "datapack-tracker-9c428",
+    "storage_bucket": "datapack-tracker-9c428.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314829463261:android:c198a3a8749ca461ff8534",
+        "android_client_info": {
+          "package_name": "com.example.datapacktracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314829463261-pjfh7rmp4femnhc1mm7eklcj93tqa1bc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU-fPKaQayJeTkDBNgZL3fe9APH61frdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314829463261-pjfh7rmp4femnhc1mm7eklcj93tqa1bc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
