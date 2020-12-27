@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a5a59bda-34d1-4f1f-b332-76b8d09aa527" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/java/com/example/datapacktracker/MenuPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/java/com/example/datapacktracker/MenuPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/drawable/ic_baseline_email_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/drawable/ic_baseline_email_24.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/drawable/ic_baseline_person_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/drawable/ic_baseline_person_24.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/layouts/main_screen/layout/activity_menu_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/layouts/main_screen/layout/activity_menu_page.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/layouts/user_registration/layout/activity_login_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/layouts/user_registration/layout/activity_login_page.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/layouts/user_registration/layout/activity_signup_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/layouts/user_registration/layout/activity_signup_page.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataPackTracker/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/DataPackTracker/gradlew" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1mENgMW4J1PXtrEL1AP9XPxJIF2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a5a59bda-34d1-4f1f-b332-76b8d09aa527" name="Default Changelist" comment="" />
+      <created>1609054900400</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1609054900400</updated>
+    </task>
+    <servers />
+  </component>
+</project>

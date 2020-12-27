@@ -11,7 +11,7 @@
         android:layout_height="100dp"
         android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
-        />
+         />
 
     <View
         android:id="@+id/view8"
@@ -68,7 +68,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="35dp"
-                android:autofillHints="firstname"
+                android:autofillHints="@string/firstname"
                 android:background="@drawable/edit"
                 android:drawableStart="@drawable/person"
                 android:drawableLeft="@drawable/person"
@@ -77,7 +77,7 @@
                 android:inputType="text"
                 android:padding="20dp"
                 android:textColor="#2CA7E0"
-                />
+                 />
 
             <EditText
                 android:id="@+id/lastname"
@@ -88,7 +88,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:autofillHints="lastname"
+                android:autofillHints="@string/lastname"
                 android:background="@drawable/edit"
                 android:drawableStart="@drawable/person"
                 android:drawableLeft="@drawable/person"
@@ -110,7 +110,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:autofillHints="email"
+                android:autofillHints="@string/email"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edit"
                 android:drawableStart="@drawable/ic_baseline_email_24"
@@ -120,7 +120,7 @@
                 android:inputType="textEmailAddress"
                 android:padding="20dp"
                 android:textColor="#2CA7E0"
-                />
+                 />
 
             <EditText
                 android:id="@+id/password"
@@ -178,12 +178,12 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
-                android:background="white"
+                android:background="@color/white"
                 android:text="@string/go_to_login_page"
                 android:textColor="#2CA7E0"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                />
+                 />
 
         </RelativeLayout>
     </ScrollView>
