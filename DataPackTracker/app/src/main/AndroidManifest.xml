@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.datapacktracker">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +20,11 @@
         android:theme="@style/AppTheme">
         <activity android:name="user_registration.reset_password" />
         <activity android:name=".MenuPage" />
+        <activity android:name="towerNavigation.findTower"/>
         <activity android:name="user_registration.signup_page" />
         <activity android:name="user_registration.login_page" />
         <activity android:name="home.HomeActivity" />
+        <activity android:name="Emergency_DataBank.emergency_databank" />
         <activity android:name="home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -21,4 +21,18 @@
     <string name="reset_password">reset password</string>
     <string name="back">back</string>
     <string name="signout">SignOut</string>
+    <string name="timelimit">Enter time limit</string>
+    <string name="datalimit">Enter data limit</string>
+    <string name="enableDatabank">Enable Databank</string>
+    <string name="disableDatabank">Disable Databank</string>
+    <string name="sentence">Data is wealth</string>
+    <string name="omb">0 MB</string>
+    <string name="otime">00:00</string>
+    <string name="nav_header_desc">logo of organization</string>
+    <string name="home">Home</string>
+    <string name="emergency_databank">Emergency Databank</string>
+    <string name="tower_find">Find Nearby Towers</string>
+    <string name="permission_message">You need to grant access to usage stats\n GRANT PERMISSION</string>
+    <string name="last_time_used_never">Last time used: never</string>
+    <string name="last_time_used">Last time used: %1$s</string>
 </resources>
