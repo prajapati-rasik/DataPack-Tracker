@@ -12,8 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="@+id/LaunchMap"
         android:layout_alignParentEnd="@+id/LaunchMap"
-        android:background="@drawable/button"
-        android:onClick="process"
         android:text="Launch Map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

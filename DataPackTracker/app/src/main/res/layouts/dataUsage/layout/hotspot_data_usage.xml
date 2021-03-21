@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarHT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbarHT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?colorPrimary"
+                app:title="@string/data_usage"
+                app:titleTextColor="@color/white">
+
+                <Spinner
+                    android:id="@+id/spinnerHT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_marginEnd="10dp"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/hotspotUsageSwipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardViewHT"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:cardCornerRadius="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtHotspotUsageHT"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Hotspot Usage"
+                            android:textColor="@color/white"
+                            android:textSize="19sp" />
+
+                        <LinearLayout
+                            android:id="@+id/layoutHT"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtHotspotUsageHT"
+                            android:layout_margin="5dp"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:weightSum="10">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_marginStart="40dp"
+                                        android:layout_weight="4"
+                                        android:padding="5dp"
+                                        android:text="Received:"
+                                        android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/txtReceivedHT"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:padding="5dp"
+                                    android:layout_weight="6"
+                                    android:text="0 MB"
+                                    android:textSize="20sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layout2HT"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/layoutHT"
+                            android:layout_margin="5dp"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:weightSum="10">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginStart="40dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_weight="4"
+                                        android:padding="5dp"
+                                        android:text="Sent:"
+                                        android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/txtSentHT"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="6"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:padding="5dp"
+                                    android:text="0 MB"
+                                    android:textSize="20sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/layout2HT"
+                            android:layout_margin="5dp"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal"
+                            android:padding="5dp"
+                            android:visibility="visible"
+                            android:weightSum="10">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_marginStart="40dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_weight="4"
+                                        android:padding="5dp"
+                                        android:text="Total:"
+                                        android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/txtTotalHT"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="6"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:padding="5dp"
+                                    android:text="0 MB"
+                                    android:textSize="20sp" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/dataUsageMProgressBarHT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible"
+                    android:indeterminate="true"
+                    android:layout_gravity="center"/>
+
+                </RelativeLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

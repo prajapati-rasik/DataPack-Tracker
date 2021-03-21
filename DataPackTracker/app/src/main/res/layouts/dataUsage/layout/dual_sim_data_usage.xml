@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dataDualSimcardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/cardBackground"
+    app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="50.0"
+            android:orientation="vertical"
+            android:paddingTop="3dp"
+            android:paddingBottom="1dp"
+            android:weightSum="32">
+
+                    <TextView
+                        android:id="@+id/txtDataUsageMTitleDS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/data_usage"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingTop="10dp"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="50">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="17"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wifi" />
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMWifiRxDS"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="11"
+                            android:text="120 MB" />
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMWifiTxDS"
+                            android:layout_width="0dp"
+                            android:layout_weight="11"
+                            android:layout_height="wrap_content"
+                            android:text="111.2 MB " />
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMWifiTotalDS"
+                            android:layout_weight="11"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="999.2 MB "
+                            android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="50">
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMSimOneNameDS"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="17"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:text="@string/sim_1" />
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMSimOneRxDS"
+                            android:layout_width="0dp"
+                            android:layout_weight="11"
+                            android:layout_height="wrap_content"
+                            android:text="120.2 MB" />
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMSimOneTxDS"
+                            android:layout_width="0dp"
+                            android:layout_weight="11"
+                            android:layout_height="wrap_content"
+                            android:text="120.5 MB " />
+
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMSimOneTotalDS"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="11"
+                            android:text="140.4 MB "
+                            android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dualSimVisibilityDS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:weightSum="50">
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMSimTwoNameDS"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="17"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:text="@string/sim_2" />
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMSimTwoRxDS"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="11"
+                            android:text="120 MB" />
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMSimTwoTxDS"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="11"
+                            android:text="1024 MB " />
+
+                        <TextView
+                            android:id="@+id/txtDataUsageMSimTwoTotalDS"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="11"
+                            android:text="9.1 GB "
+                            android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

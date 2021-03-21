@@ -1,9 +1,5 @@
 package user_registration;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.datapacktracker.MenuPage;
 import com.example.datapacktracker.R;
@@ -26,23 +26,21 @@ import home.HomeActivity;
 
 public class login_page extends AppCompatActivity {
 
-    private Button log;
     private EditText email,pass;
     private FirebaseAuth auth;
-    private Button have_account;
     private ProgressBar progressBar;
-    private Button forgotpassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-        log=findViewById(R.id.loginbutton);
-        email=findViewById(R.id.email);
-        pass=findViewById(R.id.password);
-        progressBar = findViewById(R.id.progressBar);
+        Button log = findViewById(R.id.loginbutton);
+        email=findViewById(R.id.email_text_input);
+        pass=findViewById(R.id.password_text_input);
+        progressBar = findViewById(R.id.progressBar1);
         auth=FirebaseAuth.getInstance();
-        have_account = findViewById(R.id.toptext);
-        forgotpassword = findViewById(R.id.forgot_password);
+        Button have_account = findViewById(R.id.do_not_have_account);
+        Button forgotpassword = findViewById(R.id.forgot_password);
         log.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -101,14 +99,13 @@ public class login_page extends AppCompatActivity {
             Toast.makeText(login_page.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(View.GONE);
             startActivity(new Intent(login_page.this,MenuPage.class));
-            finish();
         }
         else
         {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(login_page.this,"Email not verified",Toast.LENGTH_SHORT).show();
-            finish();
         }
+        finish();
     }
 
     private void resetPassword() {

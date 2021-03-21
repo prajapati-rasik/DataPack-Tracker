@@ -25,19 +25,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 public class findTower extends AppCompatActivity {
-    //Initialize Variable
+
     private LocationRequest locationRequest;
-    private Button btn;
     public static final int REQUEST_CHECK_SETTING = 1001;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_tower);
-    }
+
+        }
+
     public void process(View view)
     {
-        Intent chooser = null;
-        btn=findViewById(R.id.LaunchMap);
+        Intent chooser=null;
+        Button btn = findViewById(R.id.LaunchMap);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,4 +104,5 @@ public class findTower extends AppCompatActivity {
             }
         }
     }
+
 }

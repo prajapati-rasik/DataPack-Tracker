@@ -51,13 +51,6 @@ public class MenuPage extends AppCompatActivity {
             }
         });
 
-        data_calculation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MenuPage.this, usageCalculate.class));
-                drawerLayout.closeDrawer(GravityCompat.START);
-            }
-        });
     }
 
     private static void openDrawer(DrawerLayout drawerLayout) {

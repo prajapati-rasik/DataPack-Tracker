@@ -35,7 +35,23 @@ android {
                             'src/main/res',
                             'src/main/res/layouts/UsageCalculation',
                             'src/main/res/layouts/UsageCalculation/layout',
-                            'src/main/res/Emergency_DataBank', 'src/main/res/layouts/Emergency_DataBank', 'src/main/res/layouts/Emergency_DataBank/layout', 'src/main/res/layouts/navigationDrawer', 'src/main/res/layouts/navigationDrawer/layout', 'src\\main\\res', 'src\\main\\res\\layouts\\towerFinder\\layout', 'src\\main\\res\\layouts\\towerFinder', 'src\\main\\res\\layouts\\UsageCalculation\\layout', 'src\\main\\res\\layouts\\usageCalculation\\layout', 'src\\main\\res\\layouts\\UsageCalculation', 'src\\main\\res\\layouts\\calculate_usage', 'src\\main\\res\\layouts\\calculate_usage\\layout', 'src\\main\\res\\layouts\\profile\\layout', 'src\\main\\res\\layouts\\profile', 'src\\main\\res\\layouts\\speedTesting', 'src\\main\\res\\layouts\\speedTesting\\layout', 'src\\main\\res\\layouts\\setting', 'src\\main\\res\\layouts\\setting\\layout', 'src\\main\\res\\layouts\\bedTimeMode', 'src\\main\\res\\layouts\\bedTimeMode\\layout',
+                            'src/main/res/layouts/Emergency_DataBank',
+                            'src/main/res/layouts/Emergency_DataBank/layout',
+                            'src/main/res/layouts/navigationDrawer',
+                            'src/main/res/layouts/navigationDrawer/layout',
+                            'src\\main\\res',
+                            'src\\main\\res\\layouts\\towerFinder\\layout',
+                            'src\\main\\res\\layouts\\towerFinder',
+                            'src\\main\\res\\layouts\\UsageCalculation\\layout',
+                            'src\\main\\res\\layouts\\UsageCalculation',
+                            'src\\main\\res\\layouts\\profile\\layout',
+                            'src\\main\\res\\layouts\\profile',
+                            'src\\main\\res\\layouts\\speedTesting',
+                            'src\\main\\res\\layouts\\speedTesting\\layout',
+                            'src\\main\\res\\layouts\\setting',
+                            'src\\main\\res\\layouts\\setting\\layout',
+                            'src\\main\\res\\layouts\\bedTimeMode',
+                            'src\\main\\res\\layouts\\bedTimeMode\\layout', 'src\\main\\res\\layouts\\appUsage\\layout', 'src\\main\\res\\layouts\\appUsage', 'src\\main\\res\\layouts\\appUsageStatistics\\layout', 'src\\main\\res\\layouts\\dataUsage\\layout', 'src\\main\\res\\layouts\\appUsageStatistics', 'src\\main\\res\\layouts\\dataUsage', 'src\\main\\res\\layouts\\foregroundBackgroundDataUsage', 'src\\main\\res\\layouts\\foregroundBackgroundDataUsage\\layout', 'src\\main\\res\\layouts\\hotspotUsage\\layout', 'src\\main\\res\\layouts\\hotspot\\layout', 'src\\main\\res\\layouts\\hotspotDataUsage\\layout',
                     ]
             java {
                 srcDirs 'src\\main\\java', 'src\\main\\java\\towerFinder', 'src\\main\\java\\UsageCalculation'
@@ -47,19 +63,23 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'com.google.firebase:firebase-analytics:18.0.0'
+    implementation 'com.google.firebase:firebase-analytics:18.0.2'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'com.google.firebase:firebase-auth:20.0.1'
-    implementation 'com.google.firebase:firebase-firestore:22.0.0'
-    implementation 'com.google.firebase:firebase-storage:19.2.0'
-    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.3'
+    implementation 'com.google.firebase:firebase-firestore:22.1.1'
+    implementation 'com.google.firebase:firebase-storage:19.2.1'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation "android.arch.navigation:navigation-fragment:2.3.0"
     implementation "android.arch.navigation:navigation-ui:2.3.0"
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 }
+
+

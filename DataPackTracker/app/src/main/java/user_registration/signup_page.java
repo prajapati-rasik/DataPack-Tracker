@@ -1,9 +1,5 @@
 package user_registration;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,8 +10,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import home.HomeActivity;
-import com.example.datapacktracker.MenuPage;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.datapacktracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,10 +26,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Objects;
 
+import home.HomeActivity;
+
 
 public class signup_page extends AppCompatActivity {
 
-    private Button reg;
     private EditText email,pass,first_name,last_name,confirm;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
@@ -43,21 +42,21 @@ public class signup_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_page);
-        reg=findViewById(R.id.signup_button);
-        email=findViewById(R.id.email);
-        pass=findViewById(R.id.password);
+        Button reg = findViewById(R.id.signup_button);
+        email=findViewById(R.id.email1);
+        pass=findViewById(R.id.password1);
         auth=FirebaseAuth.getInstance();
-        first_name = findViewById(R.id.firstname);
-        last_name = findViewById(R.id.lastname);
-        confirm = findViewById(R.id.repassword);
+        first_name = findViewById(R.id.firstname1);
+        last_name = findViewById(R.id.lastname1);
+        confirm = findViewById(R.id.confirm_password1);
         progressBar = findViewById(R.id.progressBar);
         db = FirebaseFirestore.getInstance();
 
         reg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String txt_email=email.getText().toString();
-                String txt_pass=pass.getText().toString();
+                String txt_email=email.getText().toString().trim();
+                String txt_pass=pass.getText().toString().trim();
                 fname = first_name.getText().toString().trim();
                 lname = last_name.getText().toString().trim();
                 String confirmpass = confirm.getText().toString().trim();
