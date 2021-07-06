@@ -2,7 +2,9 @@ package dataUsage.Fragments;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datapacktracker.R;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,6 +41,7 @@ import Usage_calculation.adapters.DataUsageCalculationFragmentAdapter;
 import Usage_calculation.asyncTasks.dataUsageCustomAsync;
 import Usage_calculation.models.dailyUsageModel;
 import Usage_calculation.models.dataUsageAllStringModel;
+import Usage_calculation.models.dataUsageIntervalTypeModel;
 
 public class DataUsageCustomFragment extends Fragment {
 
@@ -73,7 +83,8 @@ public class DataUsageCustomFragment extends Fragment {
             z = false;
         }
         Calendar calendar2 = this.startCal;
-        if (calendar2 == null || (calendar = this.endCal) == null) {
+        calendar = this.endCal;
+        if (calendar2 == null || calendar == null) {
             return z;
         }
         int compareTo = calendar2.compareTo(calendar);
@@ -163,6 +174,43 @@ public class DataUsageCustomFragment extends Fragment {
         }
     }
 
+    public static void updateChart(View view, List<dataUsageIntervalTypeModel> list, boolean isDual){
+        PieChart pie = (PieChart)view.findViewById(R.id.PiechartCustom);
+        pie.setVisibility(View.VISIBLE);
+        pie.setUsePercentValues(true);
+        pie.getDescription().setEnabled(false);
+        ArrayList<PieEntry> xvalues = new ArrayList<PieEntry>();
+        for(dataUsageIntervalTypeModel m : list){
+            xvalues.add(new PieEntry(m.getReceivedWifi()/1048576.0f, "Wifi Received"));
+            xvalues.add(new PieEntry(m.getSentWifi()/1048576.0f, "Wifi Sent"));
+            xvalues.add(new PieEntry(m.getReceivedSIM1()/1048576.0f, "SIM1 Received"));
+            xvalues.add(new PieEntry(m.getSentSIM1()/1048576.0f, "SIM1 Sent"));
+            if(isDual){
+                xvalues.add(new PieEntry(m.getReceivedSIM2()/1048576.0f, "SIM2 Received"));
+                xvalues.add(new PieEntry(m.getSentSIM2()/1048576.0f, "SIM2 Sent"));
+            }
+        }
+        PieDataSet dataSet = new PieDataSet(xvalues, "");
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        PieData data = new PieData(dataSet);
+        pie.setData(data);
+        pie.invalidate();
+        pie.setCenterText("MB\n ");
+        pie.setDrawEntryLabels(false);
+        pie.setContentDescription("");
+        pie.setEntryLabelTextSize(12);
+        Legend legend = pie.getLegend();
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        legend.setWordWrapEnabled(true);
+        legend.setDrawInside(false);
+        legend.setYOffset(5f);
+        legend.setXOffset(20f);
+        legend.setYEntrySpace(0f);
+        legend.setTextSize(8f);
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         try {
@@ -170,12 +218,10 @@ public class DataUsageCustomFragment extends Fragment {
             setView(this.view);
             showCalender();
             this.button.setOnClickListener(new View.OnClickListener() {
-                /* class app.club.dailydatausages.c_fol.e_view.AnonymousClass7 */
-
                 @SuppressLint({"WrongConstant"})
                 public void onClick(View view) {
                     if (DataUsageCustomFragment.this.showErrors()) {
-                        DataUsageCustomFragment.this.cardView.setVisibility(View.INVISIBLE);
+                        DataUsageCustomFragment.this.cardView.setVisibility(View.GONE);
                         DataUsageCustomFragment.this.list = new ArrayList<>();
                         DataUsageCustomFragment.this.model = new dailyUsageModel();
                         DataUsageCustomFragment.this.a = DataUsageCustomFragment.this.startCal;
@@ -199,9 +245,10 @@ public class DataUsageCustomFragment extends Fragment {
                         DataUsageCustomFragment.this.a = null;
                         DataUsageCustomFragment.this.b = null;
                         return;
+                    }else {
+                        DataUsageCustomFragment.this.cardView.setVisibility(View.VISIBLE);
+                        DataUsageCustomFragment.this.errors.setText(DataUsageCustomFragment.this.stringBuilder);
                     }
-                    DataUsageCustomFragment.this.cardView.setVisibility(View.VISIBLE);
-                    DataUsageCustomFragment.this.errors.setText(DataUsageCustomFragment.this.stringBuilder);
                 }
             });
         } catch (Exception e2) {

@@ -18,6 +18,7 @@ import com.example.datapacktracker.MenuPage;
 import com.example.datapacktracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,51 +42,36 @@ public class login_page extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         Button have_account = findViewById(R.id.do_not_have_account);
         Button forgotpassword = findViewById(R.id.forgot_password);
-        log.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                String txt_email=email.getText().toString();
-                String txt_pass=pass.getText().toString();
-                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_pass)){
-                    Toast.makeText(login_page.this,"Details is Empty",Toast.LENGTH_SHORT).show();
-
-                }
-                else if(txt_pass.length()<6){
-                    Toast.makeText(login_page.this,"Password Length is less than 6",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    login_user(txt_email,txt_pass);
-                }
-
+        log.setOnClickListener(v -> {
+            String txt_email=email.getText().toString();
+            String txt_pass=pass.getText().toString();
+            if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_pass)){
+                Toast.makeText(login_page.this,"Details is Empty",Toast.LENGTH_SHORT).show();
             }
+            else if(txt_pass.length()<6){
+                Toast.makeText(login_page.this,"Password Length is less than 6",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                login_user(txt_email,txt_pass);
+            }
+
         });
 
-        have_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(login_page.this, signup_page.class));
-                finish();
-            }
+        have_account.setOnClickListener(v -> {
+            startActivity(new Intent(login_page.this, signup_page.class));
+            finish();
         });
 
-        forgotpassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetPassword();
-            }
-        });
+        forgotpassword.setOnClickListener(v -> resetPassword());
     }
     private void login_user(String email, String pass) {
         progressBar.setVisibility(View.VISIBLE);
-        auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
-                    Toast.makeText(login_page.this,"Wrong Credentials ",Toast.LENGTH_SHORT).show();
-                }else{
-                    checkIfEmailVerified();
-                }
+        auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(task -> {
+            if(!task.isSuccessful()){
+                Toast.makeText(login_page.this,"Wrong Credentials ",Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+            }else{
+                checkIfEmailVerified();
             }
         });
     }
@@ -99,13 +85,14 @@ public class login_page extends AppCompatActivity {
             Toast.makeText(login_page.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(View.GONE);
             startActivity(new Intent(login_page.this,MenuPage.class));
+            finish();
         }
         else
         {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(login_page.this,"Email not verified",Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
         }
-        finish();
     }
 
     private void resetPassword() {
@@ -113,7 +100,7 @@ public class login_page extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.activity_reset_password, null);
         dialogBuilder.setView(dialogView);
-        final EditText editEmail = dialogView.findViewById(R.id.edtTxtEmail);
+        final TextInputEditText editEmail = dialogView.findViewById(R.id.edtTxtEmailInput);
         final Button btnReset = dialogView.findViewById(R.id.send_reset_pass);
         final ProgressBar progress =  dialogView.findViewById(R.id.progressBar);
         final AlertDialog dialog = dialogBuilder.create();

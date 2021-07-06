@@ -10,8 +10,11 @@ import android.widget.RelativeLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.datapacktracker.R;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import Usage_calculation.asyncTasks.appUsageAsync;
 import Usage_calculation.asyncTasks.dataUsageAsync;
 import Usage_calculation.asyncTasks.dataUsageCustomAsync;
 import Usage_calculation.makeCalenderInstances;
@@ -22,15 +25,15 @@ public class DataUsageYearlyFragment extends Fragment {
     private ProgressBar progressBar;
     private View view;
     private dataUsageAsync asyncTask;
-    private dataUsageCustomAsync customAsync;
+    private appUsageAsync customAsync;
 
-    private void setData(View view) {
+    private void setData(View view, PieChart pie, BarChart bar) {
         if (getActivity() != null) {
             if(getArguments() == null) {
-                this.asyncTask = new dataUsageAsync(getActivity().getApplicationContext(), view, this.progressBar, makeCalenderInstances.years(getActivity().getApplicationContext()));
+                this.asyncTask = new dataUsageAsync(getActivity().getApplicationContext(), view, this.progressBar, makeCalenderInstances.years(getActivity().getApplicationContext()), pie, bar);
                 this.asyncTask.execute();
             }else{
-                this.customAsync = new dataUsageCustomAsync(view, getActivity().getApplicationContext(), this.progressBar, makeCalenderInstances.years(getActivity().getApplicationContext()), getArguments().getInt("PackageId", 0));
+                this.customAsync = new appUsageAsync(view, getActivity().getApplicationContext(), this.progressBar, makeCalenderInstances.years(getActivity().getApplicationContext()), getArguments().getInt("PackageId", 0), pie, bar);
                 this.customAsync.execute();
             }
         }
@@ -40,13 +43,13 @@ public class DataUsageYearlyFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         this.view = layoutInflater.inflate(R.layout.daily_data_usage_fragment, viewGroup, false);
         this.progressBar = (ProgressBar) this.view.findViewById(R.id.dataUsageProgressBarDaily);
-        setData(this.view);
+        BarChart chart = this.view.findViewById(R.id.BarchartDaily);
+        setData(this.view, null, chart);
         FloatingActionButton floatingActionButton = (FloatingActionButton) this.view.findViewById(R.id.datUsageMFabDaily);
-        RelativeLayout relativeLayout = (RelativeLayout) this.view.findViewById(R.id.dataUsageRootViewDaily);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 DataUsageYearlyFragment secondView = DataUsageYearlyFragment.this;
-                secondView.setData(secondView.view);
+                secondView.setData(secondView.view, null, chart);
             }
         });
         floatingButtonScrollBehaviour.scrollBehaviour(floatingActionButton, view);
@@ -66,7 +69,7 @@ public class DataUsageYearlyFragment extends Fragment {
             async.cancel(true);
             this.asyncTask = null;
         }
-        dataUsageCustomAsync casync = this.customAsync;
+        appUsageAsync casync = this.customAsync;
         if(casync != null){
             casync.cancel(true);
             this.customAsync = null;

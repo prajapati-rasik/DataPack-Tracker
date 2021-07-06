@@ -5,10 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    <LinearLayout
         android:id="@+id/dataUsageRootViewDaily"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="wrap_content">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/PiechartDaily"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:visibility="gone"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/BarchartDaily"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:visibility="gone"/>
 
         <include
             android:id="@+id/data_usage_title_view_daily"
@@ -17,10 +35,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/data_usage_recyclerView_daily"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/data_usage_title_view_daily"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    </ScrollView>
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/dataUsageProgressBarDaily"

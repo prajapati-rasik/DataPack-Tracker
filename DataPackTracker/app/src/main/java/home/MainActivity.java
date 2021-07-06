@@ -7,10 +7,13 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.datapacktracker.MenuPage;
 import com.example.datapacktracker.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import Emergency_DataBank.emergency_databank;
 import dataUsage.dataUsage;
+import user_registration.signup_page;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-                    startActivity(new Intent(MainActivity.this, dataUsage.class));
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     finish();
                 }else{
-                    startActivity(new Intent(MainActivity.this, dataUsage.class));
+                    startActivity(new Intent(MainActivity.this, MenuPage.class));
                     finish();
                 }
             }

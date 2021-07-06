@@ -103,14 +103,12 @@ public class signup_page extends AppCompatActivity {
                     reg_user.put("last_name",lname);
                     assert user != null;
                     reg_user.put("uid",user.getUid());
-                    db.collection("User").add(reg_user).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if(task.isSuccessful()){
-                                sendVerificationEmail();
-                            }else{
-                                Toast.makeText(signup_page.this,"error occured",Toast.LENGTH_SHORT).show();
-                            }
+                    db.collection("User").add(reg_user).addOnCompleteListener(task1 -> {
+                        if(task1.isSuccessful()){
+                            sendVerificationEmail();
+                        }else{
+                            Toast.makeText(signup_page.this,"error occured",Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     });
                 }

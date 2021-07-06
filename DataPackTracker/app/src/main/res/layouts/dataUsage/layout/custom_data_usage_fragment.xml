@@ -21,6 +21,8 @@
                 android:id="@+id/dateSelectionCardViewCustom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginTop="14dp">
 
                 <LinearLayout
@@ -124,7 +126,7 @@
                 android:layout_below="@id/dateSelectionCardViewCustom"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="14dp"
-                android:visibility="invisible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -173,10 +175,24 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/pieChartDataUsageCustom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/setDataPlanButtonLayoutCustom">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/PiechartCustom"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/containerRelativeLayoutCustom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/setDataPlanButtonLayoutCustom"
+                android:layout_below="@id/pieChartDataUsageCustom"
                 android:paddingTop="5dp"
                 android:visibility="invisible">
 

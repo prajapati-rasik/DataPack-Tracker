@@ -79,7 +79,7 @@ public class allAppUsageFBAdapter extends RecyclerView.Adapter<allAppUsageFBAdap
     @Override
     @NonNull
     public allAppUsageFBAdapterView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new allAppUsageFBAdapterView(this, this.layoutInflater.inflate(R.layout.foreground_background_data_usage, viewGroup, false));
+        return new allAppUsageFBAdapterView(this, this.layoutInflater.inflate(R.layout.card_view_fb, viewGroup, false));
     }
 
     public void onBindViewHolder(@NonNull allAppUsageFBAdapterView view, final int i) {

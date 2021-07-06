@@ -20,17 +20,11 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/appUsageToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:background="@color/colorPrimary"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 app:titleTextColor="@color/white">
-
-                <Spinner
-                    android:id="@+id/appUsageSpinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end" />
 
             </com.google.android.material.appbar.MaterialToolbar>
 
@@ -45,21 +39,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="10dp">
+                android:layout_alignParentTop="true">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:orientation="horizontal"
+                    android:padding="15dp"
+                    android:weightSum="5">
 
                     <ImageView
                         android:id="@+id/appStatisticAppIcon"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
 
                     <TextView
                         android:id="@+id/txtAppStatisticAppName"
@@ -68,13 +63,17 @@
                         android:text="@string/name_of_app"
                         android:padding="10dp"
                         android:textColor="@color/black"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"/>
 
                     <Button
                         android:id="@+id/btnAppStatisticAppInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="@string/app_info"
+                        android:layout_weight="1"
                         android:textColor="@color/white" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -83,6 +82,7 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@id/cardView"
                 android:layout_alignParentStart="true"
                 app:tabGravity="fill"

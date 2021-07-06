@@ -43,7 +43,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/data_usage"
+        android:id="@+id/data_usage_menu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:clickable="true"
@@ -52,7 +52,7 @@
         android:focusable="true">
 
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_baseline_data_usage_24" />
 
@@ -63,11 +63,11 @@
             android:gravity="center"
             android:text="Data Usage"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/databank_menu"
+        android:id="@+id/find_tower_menu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:clickable="true"
@@ -76,32 +76,7 @@
         android:focusable="true">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_baseline_storefront_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:gravity="center"
-            android:text="@string/emergency_databank"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/find_tower"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_baseline_settings_input_antenna_24" />
 
@@ -112,12 +87,12 @@
             android:gravity="center"
             android:text="@string/tower_find"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/bed_time_mod"
+        android:id="@+id/bed_time_mod_menu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:clickable="true"
@@ -126,7 +101,7 @@
         android:focusable="true">
 
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_baseline_bedtime_24" />
 
@@ -137,12 +112,12 @@
             android:gravity="center"
             android:text="Bed Time Mode"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/network_speed"
+        android:id="@+id/network_speed_menu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:clickable="true"
@@ -151,7 +126,7 @@
         android:focusable="true">
 
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_baseline_speed_24" />
 
@@ -162,12 +137,12 @@
             android:gravity="center"
             android:text="Network Speed"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/profile"
+        android:id="@+id/profile_menu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:clickable="true"
@@ -176,7 +151,7 @@
         android:focusable="true">
 
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_baseline_person_24" />
 
@@ -187,32 +162,7 @@
             android:gravity="center"
             android:text="Profile"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/settings"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:clickable="true"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:focusable="true">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_baseline_settings_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:gravity="center"
-            android:text="Settings"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

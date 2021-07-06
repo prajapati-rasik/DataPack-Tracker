@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -26,8 +27,8 @@
 
             <ImageView
                 android:id="@+id/imageappUsageIconFB"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:contentDescription="App Icon"
                 android:src="@mipmap/ic_launcher" />
         </LinearLayout>
@@ -86,18 +87,19 @@
                         android:textStyle="bold" />
             </LinearLayout>
 
-                <com.google.android.material.progressindicator.LinearProgressIndicator
+                <ProgressBar
                     android:id="@+id/appUsageProgressBarFB"
                     android:layout_width="match_parent"
                     android:layout_marginTop="2dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:indeterminate="true"
+                    android:indeterminate="false"
                     android:max="100"
                     android:minWidth="200dp"
                     android:minHeight="8dp"
-                    android:progress="50" />
+                    android:progress="50"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 
         </LinearLayout>
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

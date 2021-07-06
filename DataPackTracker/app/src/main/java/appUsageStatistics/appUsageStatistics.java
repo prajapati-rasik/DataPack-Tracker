@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -57,7 +58,7 @@ public class appUsageStatistics extends AppCompatActivity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.app_usage_statistics);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.appUsageToolbar);
+        Toolbar toolbar = findViewById(R.id.appUsageToolbar);
         toolbar.setTitle(R.string.app_usage);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= 23) {
@@ -70,11 +71,11 @@ public class appUsageStatistics extends AppCompatActivity {
         }
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         this.packageManager = getPackageManager();
-        this.name = (TextView) findViewById(R.id.txtAppStatisticAppName);
+        this.name = findViewById(R.id.txtAppStatisticAppName);
         this.uid = getIntent().getIntExtra("Uid", 0);
         this.packageName = getIntent().getStringExtra("PackageName");
         this.name.setText(getIntent().getStringExtra("AppName"));
-        this.viewPager = (ViewPager2) findViewById(R.id.appStatisticViewPager);
+        this.viewPager = findViewById(R.id.appStatisticViewPager);
         Bundle bundle2 = new Bundle();
         bundle2.putInt("PackageId", this.uid);
 

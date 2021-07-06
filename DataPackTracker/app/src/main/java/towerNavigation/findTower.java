@@ -1,108 +1,180 @@
-package towerNavigation;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.content.IntentSender;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+ package towerNavigation;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import com.example.datapacktracker.R;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationRequest;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.internal.ICameraUpdateFactoryDelegate;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-public class findTower extends AppCompatActivity {
+import Usage_calculation.SubscriberDetails;
 
-    private LocationRequest locationRequest;
-    public static final int REQUEST_CHECK_SETTING = 1001;
+ //public class findTower extends FragmentActivity implements OnMapReadyCallback {
+ public class findTower extends FragmentActivity{
+    EditText etSource, etDestination;
+    Button btTrack;
+
+    SupportMapFragment supportMapFragment;
+    FusedLocationProviderClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_tower);
 
-        }
+        checkPermissions();
+        SubscriberDetails.setAllSubscriptionDetails(this, this);
 
-    public void process(View view)
-    {
-        Intent chooser=null;
-        Button btn = findViewById(R.id.LaunchMap);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                locationRequest= LocationRequest.create();
-                locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-                locationRequest.setInterval(5000);
-                locationRequest.setFastestInterval(2000);
+        etSource = findViewById(R.id.et_source);
+        etDestination = findViewById(R.id.et_destination);
+        btTrack = findViewById(R.id.bt_track);
 
-                LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                        .addLocationRequest(locationRequest);
-                builder.setAlwaysShow(true);
+        supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+        client = LocationServices.getFusedLocationProviderClient(this);
 
-                Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getApplicationContext())
-                        .checkLocationSettings(builder.build());
+        if (!checkPermissions()) {
+            requestPermissions();
+        }/*else {
+            getCurrentLocation();
+        }*/
 
-                result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
-                    @Override
-                    public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
-                        try {
-                            LocationSettingsResponse response = task.getResult(ApiException.class);
-                            Toast.makeText(findTower.this, "GPS is On", Toast.LENGTH_SHORT);
-                        } catch (ApiException e) {
-                            switch (e.getStatusCode()){
-                                case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+        String sSource = etSource.getText().toString().trim();
+        SharedPreferences sharedPreferences = this.getSharedPreferences("MultipleSim", Context.MODE_PRIVATE);
+        String name1 = sharedPreferences.getString("simCarrier1", null);
+        name1 = name1 + " Towers";
+        DisplayTrack(sSource, name1);
 
-
-                                    try {
-                                        ResolvableApiException resolvableApiException = (ResolvableApiException)e;
-                                        resolvableApiException.startResolutionForResult(findTower.this,REQUEST_CHECK_SETTING);
-                                    } catch (IntentSender.SendIntentException sendIntentException) {
-
-                                    }
-                                    break;
-                                case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                                    break;
-                            }
-                        }
-                    }
-                });
+        /*btTrack.setOnClickListener(v -> {
+            String sSource = etSource.getText().toString().trim();
+            String sDestination = etDestination.getText().toString().trim();
+            if (sSource.equals("") && sDestination.equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter both location", Toast.LENGTH_SHORT).show();
+            } else {
+                DisplayTrack(sSource, sDestination);
             }
-        });
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
-        //intent.setData(Uri.parse("geo:address.get(0).getLatitude(),address.get(0).getLongitude()"));
-        intent.setData(Uri.parse("geo:23.495491,432.474614"));
-        chooser =Intent.createChooser(intent, "Launch Map");
-        startActivity(chooser);
+        });*/
+
+    }
+
+    /*@Override
+    public void onMapReady(@NonNull GoogleMap googleMap){
+        if (!checkPermissions()) {
+            requestPermissions();
+        }else
+            getCurrentLocation();
+    }*/
+
+    /*private void getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(findTower.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 44);
+            return;
+        }
+        if(isLocationEnabled()) {
+            Task<Location> task = client.getLastLocation();
+            task.addOnSuccessListener(location -> {
+                if (location != null) {
+                    supportMapFragment.getMapAsync(googleMap -> {
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLatitude());
+                        etSource.setText(latLng.toString());
+                        MarkerOptions options = new MarkerOptions().position(latLng).title("Current Location");
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+                        googleMap.addMarker(options);
+                    });
+                }
+            });
+        }else{
+            Toast.makeText(this, "Please turn on " + " your location...", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+    }*/
+
+    private boolean checkPermissions() {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+    }
+
+    /*private boolean isLocationEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        /*if (requestCode == 44) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getCurrentLocation();
+            }
+        }*/
+    }
+
+    private void DisplayTrack(String sSource, String sDestination) {
+        try {
+            //Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + sSource + "/" + sDestination);
+            Uri uri = Uri.parse("https://www.google.co.in/maps/search/" + sDestination);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setPackage("com.google.android.apps.maps");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        } catch (ActivityNotFoundException e) {
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
-        if (requestCode == REQUEST_CHECK_SETTING){
-            switch (resultCode){
-                case Activity.RESULT_OK:
-
-                    Toast.makeText(this, "GPS is Turned On", Toast.LENGTH_SHORT);
-                    break;
-                case Activity.RESULT_CANCELED:
-                    Toast.makeText(this, "GPS is Required to be turned On", Toast.LENGTH_SHORT);
-            }
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        /*if (checkPermissions()) {
+            getCurrentLocation();
+        }*/
     }
 
 }

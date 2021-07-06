@@ -21,7 +21,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/foregroundBackgroundToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp"
                 app:title="@string/data_usage"

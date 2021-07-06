@@ -1,0 +1,24 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/change_password"
+        android:title="@string/change_password"/>
+
+    <item
+        android:id="@+id/logout_button_menu"
+        android:title="@string/signout"/>
+
+    <item
+        android:id="@+id/three"
+        android:title="@string/helpline_numbers">
+
+        <menu>
+            <item
+                android:id="@+id/helpline_number1"
+                android:title="@string/not_available"/>
+        </menu>
+
+    </item>
+
+</menu>

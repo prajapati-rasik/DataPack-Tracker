@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.RemoteException;
+import android.util.Log;
 import android.util.SparseLongArray;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -56,8 +57,8 @@ public class allAppUsageAsync extends AsyncTask<Integer, Integer, List<applicati
         this.progressBarWeakReference = new WeakReference<>(progressBar);
         this.relativeLayoutWeakReference = new WeakReference<>(relativeLayout);
         this.recyclerViewWeakReference = new WeakReference<>(recyclerView);
-        this.networkType = i2;
-        this.durationType = i3;
+        this.durationType = i2;
+        this.networkType = i3;
     }
 
     private void getData(int i2, int i3) {
@@ -200,7 +201,7 @@ public class allAppUsageAsync extends AsyncTask<Integer, Integer, List<applicati
                 }
             }
             this.l2 = new ArrayList<>();
-            getData(this.networkType, this.durationType);
+            getData(this.durationType, this.networkType);
             return this.l1;
         } catch (Exception unused) {
             return this.l1;
@@ -214,11 +215,11 @@ public class allAppUsageAsync extends AsyncTask<Integer, Integer, List<applicati
                 if (list != null && list.size() > 0) {
                     this.relativeLayoutWeakReference.get().setVisibility(View.INVISIBLE);
                     this.recyclerViewWeakReference.get().setVisibility(View.VISIBLE);
-                    this.recyclerViewWeakReference.get().setAdapter(new allAppUsageAdapter(this.contextWeakReference.get(), list));
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.contextWeakReference.get());
                     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                     this.recyclerViewWeakReference.get().setLayoutManager(linearLayoutManager);
                     this.recyclerViewWeakReference.get().setItemAnimator(new DefaultItemAnimator());
+                    this.recyclerViewWeakReference.get().setAdapter(new allAppUsageAdapter(this.contextWeakReference.get(), list));
                     this.progressBarWeakReference.get().setVisibility(View.INVISIBLE);
                 } else {
                     this.relativeLayoutWeakReference.get().setVisibility(View.VISIBLE);

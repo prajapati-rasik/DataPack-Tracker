@@ -2,6 +2,7 @@ package Usage_calculation.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +44,12 @@ public class allAppUsageAdapter extends RecyclerView.Adapter<allAppUsageAdapter.
         allAppUsageAdapterView(allAppUsageAdapter adapter1, View view) {
             super(view);
             this.adapter = adapter1;
-            this.card_lin1 = (LinearLayout) view.findViewById(R.id.card_lin1);
-            this.name = (TextView) view.findViewById(R.id.txtApplicationName);
-            this.data = (TextView) view.findViewById(R.id.txtAppUsageData);
-            this.icon = (ImageView) view.findViewById(R.id.imageappUsageIcon);
-            this.progressBar = (ProgressBar) view.findViewById(R.id.appUsageProgressBar);
-            this.percentage = (TextView) view.findViewById(R.id.appUsagePercentage);
+            this.card_lin1 = view.findViewById(R.id.card_lin1);
+            this.name = view.findViewById(R.id.txtApplicationName);
+            this.data = view.findViewById(R.id.txtAppUsageData);
+            this.icon = view.findViewById(R.id.imageappUsageIcon);
+            this.progressBar = view.findViewById(R.id.appUsageProgressBar);
+            this.percentage = view.findViewById(R.id.appUsagePercentage);
         }
 
         public void setView(applicationUIDModel applicationUIDModel1, int i) {
@@ -71,22 +72,20 @@ public class allAppUsageAdapter extends RecyclerView.Adapter<allAppUsageAdapter.
     @Override
     @NonNull
     public allAppUsageAdapterView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new allAppUsageAdapterView(this, this.layoutInflater.inflate(R.layout.card_view_fb, viewGroup, false));
+        return new allAppUsageAdapterView(this, this.layoutInflater.inflate(R.layout.single_app_view, viewGroup, false));
     }
 
+    @Override
     public void onBindViewHolder(@NonNull allAppUsageAdapterView allAppUsageAdapterView2, final int i) {
         this.model = this.list.get(i);
         allAppUsageAdapterView2.setView(this.model, i);
-        allAppUsageAdapterView2.card_lin1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                allAppUsageAdapter.firstfb1 = true;
-                Intent intent = new Intent(allAppUsageAdapter.this.context, appUsageStatistics.class);
-                intent.putExtra("Uid", ((applicationUIDModel) allAppUsageAdapter.this.list.get(i)).getUid());
-                intent.putExtra("AppName", ((applicationUIDModel) allAppUsageAdapter.this.list.get(i)).getLabel());
-                intent.putExtra("PackageName", ((applicationUIDModel) allAppUsageAdapter.this.list.get(i)).getPackageName());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                allAppUsageAdapter.this.context.startActivity(intent);
-            }
+        allAppUsageAdapterView2.card_lin1.setOnClickListener((View.OnClickListener) view -> {
+            allAppUsageAdapter.firstfb1 = true;
+            Intent intent = new Intent(allAppUsageAdapter.this.context, appUsageStatistics.class);
+            intent.putExtra("Uid", allAppUsageAdapter.this.list.get(i).getUid());
+            intent.putExtra("AppName", allAppUsageAdapter.this.list.get(i).getLabel());
+            intent.putExtra("PackageName", allAppUsageAdapter.this.list.get(i).getPackageName());
+            allAppUsageAdapter.this.context.startActivity(intent);
         });
     }
 

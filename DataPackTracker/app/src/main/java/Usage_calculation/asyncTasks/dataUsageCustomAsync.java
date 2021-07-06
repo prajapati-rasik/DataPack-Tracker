@@ -4,11 +4,14 @@ import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.datapacktracker.R;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -30,6 +33,8 @@ public class dataUsageCustomAsync extends AsyncTask<Integer, Integer, List<dataU
     private List<dailyUsageModel> list;
     private int uid;
     private SharedPreferences sharedPreferences;
+    private  ArrayList<dataUsageIntervalTypeModel> llist;
+    private boolean is2SIM;
 
     public dataUsageCustomAsync(View view, Context context, ProgressBar progressBar, List<dailyUsageModel> list, int i2) {
         this.contextWeakReference = new WeakReference<>(context);
@@ -42,6 +47,7 @@ public class dataUsageCustomAsync extends AsyncTask<Integer, Integer, List<dataU
     public List<dataUsageAllStringModel> doInBackground(Integer... numArr) {
         int i2 = 0;
         boolean isDualSim = this.sharedPreferences.getBoolean("isDualSim", false);
+        is2SIM = isDualSim;
         String id1 = this.sharedPreferences.getString("subscriberId1", null);
         String id2 = this.sharedPreferences.getString("subscriberId2", null);
         NetworkStatsManager networkStatsManager = (NetworkStatsManager) this.contextWeakReference.get().getSystemService(Context.NETWORK_STATS_SERVICE);
@@ -110,7 +116,7 @@ public class dataUsageCustomAsync extends AsyncTask<Integer, Integer, List<dataU
                     i2++;
                 }
             }
-
+            this.llist = arrayList;
             for (dataUsageIntervalTypeModel m : arrayList) {
                 dataUsageAllStringModel strings = new dataUsageAllStringModel();
                 strings.setTitle(m.getType());
@@ -137,6 +143,7 @@ public class dataUsageCustomAsync extends AsyncTask<Integer, Integer, List<dataU
         if (this.viewWeakReference.get() != null) {
             ((RelativeLayout) this.viewWeakReference.get().findViewById(R.id.containerRelativeLayoutCustom)).setVisibility(View.VISIBLE);
             DataUsageCustomFragment.updateRecycleView(this.viewWeakReference.get(), list);
+            DataUsageCustomFragment.updateChart(this.viewWeakReference.get(), llist, is2SIM);
             this.progressBarWeakReference.get().setVisibility(View.INVISIBLE);
         }
         super.onPostExecute(list);
@@ -144,7 +151,6 @@ public class dataUsageCustomAsync extends AsyncTask<Integer, Integer, List<dataU
 
     public void onPreExecute() {
         this.sharedPreferences = this.contextWeakReference.get().getSharedPreferences("MultipleSim", Context.MODE_PRIVATE);
-        ((RelativeLayout) this.viewWeakReference.get().findViewById(R.id.containerRelativeLayoutCustom)).setVisibility(View.INVISIBLE);
         this.progressBarWeakReference.get().setVisibility(View.VISIBLE);
         super.onPreExecute();
     }

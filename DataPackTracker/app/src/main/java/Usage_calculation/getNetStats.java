@@ -4,6 +4,8 @@ import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStatsManager;
 import android.net.ConnectivityManager;
 import android.os.RemoteException;
+import android.util.Log;
+import android.util.SparseLongArray;
 
 import java.util.Calendar;
 
@@ -14,27 +16,27 @@ import Usage_calculation.models.singleSimModel;
 public class getNetStats {
 
     private static singleSimModel oneModel;
-    private static NetworkStats networkStats;
     private static NetworkStats.Bucket bucket;
-    private static long rx;
-    private static long tx;
-    private static ForegroundBackgroundModel twoModel;
 
     public static ForegroundBackgroundModel getDataFBUID(int network, dailyUsageModel dmodel, int uid, NetworkStatsManager networkStatsManager, String str) {
-        twoModel = new ForegroundBackgroundModel();
+        ForegroundBackgroundModel twoModel = new ForegroundBackgroundModel();
+        twoModel.setForegroundTx(0);
+        twoModel.setForegroundRx(0);
+        twoModel.setBackgroundTx(0);
+        twoModel.setBackgroundRx(0);
         try {
-            networkStats = networkStatsManager.querySummary(network, str, dmodel.getStart().getTimeInMillis(), dmodel.getEnd().getTimeInMillis());
+            NetworkStats networkStats = networkStatsManager.querySummary(network, str, dmodel.getStart().getTimeInMillis(), dmodel.getEnd().getTimeInMillis());
             if (networkStats != null) {
                 NetworkStats.Bucket bucket = new NetworkStats.Bucket();
                 while (networkStats.hasNextBucket()) {
                     networkStats.getNextBucket(bucket);
                     if (uid == bucket.getUid()) {
                         if (bucket.getState() == NetworkStats.Bucket.STATE_FOREGROUND) {
-                            twoModel.setForegroundRx(bucket.getRxPackets());
-                            twoModel.setForegroundTx(bucket.getTxBytes());
+                            twoModel.setForegroundRx(twoModel.getForegroundRx() + bucket.getRxBytes());
+                            twoModel.setForegroundTx(twoModel.getForegroundTx() + bucket.getTxBytes());
                         } else {
-                            twoModel.setBackgroundRx(bucket.getRxBytes());
-                            twoModel.setBackgroundTx(bucket.getTxBytes());
+                            twoModel.setBackgroundRx(twoModel.getBackgroundRx() + bucket.getRxBytes());
+                            twoModel.setBackgroundTx(twoModel.getBackgroundTx() + bucket.getTxBytes());
                         }
                     }
                 }

@@ -22,8 +22,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.datapacktracker.R;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 import Usage_calculation.PermissionChecker;
 import Usage_calculation.SubscriberDetails;
@@ -40,6 +48,7 @@ public class hotspotUsage extends AppCompatActivity {
     private Spinner spinner;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private PieChart pie;
 
     private static class hotspotAsync extends AsyncTask<Void, Void, dailyDataUsageResultModel> {
         static final boolean a = (!hotspotUsage.class.desiredAssertionStatus());
@@ -49,14 +58,16 @@ public class hotspotUsage extends AppCompatActivity {
         private WeakReference<TextView> sent;
         private WeakReference<TextView> total;
         private int intervalType;
+        private WeakReference<PieChart> chart;
 
-        hotspotAsync(Context context, TextView textView, TextView textView2, TextView textView3, ProgressBar progressBar, int i) {
+        hotspotAsync(Context context, TextView textView, TextView textView2, TextView textView3, ProgressBar progressBar, PieChart pi, int i) {
             this.contextWeakReference = new WeakReference<>(context);
             this.received = new WeakReference<>(textView);
             this.sent = new WeakReference<>(textView2);
             this.total = new WeakReference<>(textView3);
             this.progressBarWeakReference = new WeakReference<>(progressBar);
             this.intervalType = i;
+            this.chart = new WeakReference<>(pi);
         }
 
         public dailyDataUsageResultModel doInBackground(Void... voidArr) {
@@ -183,6 +194,30 @@ public class hotspotUsage extends AppCompatActivity {
                     this.received.get().setText(resultFormatter.formatVal((double) dailyDataUsageResultModel.getReceiveBytes()));
                     this.sent.get().setText(resultFormatter.formatVal((double) dailyDataUsageResultModel.getSendBytes()));
                     this.total.get().setText(resultFormatter.formatVal((double) (dailyDataUsageResultModel.getReceiveBytes() + dailyDataUsageResultModel.getSendBytes())));
+                    this.chart.get().setUsePercentValues(true);
+                    this.chart.get().getDescription().setEnabled(false);
+                    ArrayList<PieEntry> xvalues = new ArrayList<PieEntry>();
+                    xvalues.add(new PieEntry(dailyDataUsageResultModel.getReceiveBytes()/1048576.0f, "Received"));
+                    xvalues.add(new PieEntry(dailyDataUsageResultModel.getSendBytes()/1048576.0f, "Sent"));
+                    PieDataSet dataSet = new PieDataSet(xvalues, "");
+                    dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                    PieData data = new PieData(dataSet);
+                    this.chart.get().setData(data);
+                    this.chart.get().invalidate();
+                    this.chart.get().setCenterText("data in MB\n ");
+                    this.chart.get().setDrawEntryLabels(false);
+                    this.chart.get().setContentDescription("");
+                    this.chart.get().setEntryLabelTextSize(12);
+                    Legend legend = this.chart.get().getLegend();
+                    legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+                    legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+                    legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+                    legend.setWordWrapEnabled(true);
+                    legend.setDrawInside(false);
+                    legend.setYOffset(5f);
+                    legend.setXOffset(20f);
+                    legend.setYEntrySpace(0f);
+                    legend.setTextSize(8f);
                 }
             } catch (Exception ignored) {
             }
@@ -212,6 +247,7 @@ public class hotspotUsage extends AppCompatActivity {
             this.sent = (TextView) findViewById(R.id.txtSentHT);
             this.total = (TextView) findViewById(R.id.txtTotalHT);
             this.spinner = (Spinner) findViewById(R.id.spinnerHT);
+            this.pie = (PieChart) findViewById(R.id.PieChartHotspot);
             this.progressBar = (ProgressBar) findViewById(R.id.dataUsageMProgressBarHT);
             this.swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.hotspotUsageSwipeRefreshLayout);
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, (int) android.R.layout.simple_spinner_item, new String[]{getResources().getString(R.string.last_hour), getResources().getString(R.string.last_twelve_hours), getResources().getString(R.string.today), getResources().getString(R.string.yesterday), getResources().getString(R.string.week), getResources().getString(R.string.month), getResources().getString(R.string.overall_time)});
@@ -225,13 +261,13 @@ public class hotspotUsage extends AppCompatActivity {
 
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long j) {
-                    new hotspotAsync(hotspotUsage.this.getApplicationContext(), hotspotUsage.this.received, hotspotUsage.this.sent, hotspotUsage.this.total, hotspotUsage.this.progressBar, i).execute();
+                    new hotspotAsync(hotspotUsage.this.getApplicationContext(), hotspotUsage.this.received, hotspotUsage.this.sent, hotspotUsage.this.total, hotspotUsage.this.progressBar,hotspotUsage.this.pie, i).execute();
                 }
             });
             this.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    new hotspotAsync(hotspotUsage.this.getApplicationContext(), hotspotUsage.this.received, hotspotUsage.this.sent, hotspotUsage.this.total, hotspotUsage.this.progressBar, hotspotUsage.this.spinner.getSelectedItemPosition()).execute();
+                    new hotspotAsync(hotspotUsage.this.getApplicationContext(), hotspotUsage.this.received, hotspotUsage.this.sent, hotspotUsage.this.total, hotspotUsage.this.progressBar, hotspotUsage.this.pie, hotspotUsage.this.spinner.getSelectedItemPosition()).execute();
                     hotspotUsage.this.swipeRefreshLayout.setRefreshing(false);
                 }
             });

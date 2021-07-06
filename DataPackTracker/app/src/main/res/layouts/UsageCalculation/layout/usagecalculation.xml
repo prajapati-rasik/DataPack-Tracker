@@ -25,6 +25,8 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:src="@drawable/ic_baseline_arrow_back_24"
                 app:tint="@color/white" />
 
@@ -37,33 +39,6 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <Spinner
-                    android:id="@+id/spinnerUsageCalculation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|end"
-                    android:layout_marginTop="5sp"
-                    android:layout_weight="1"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:id="@+id/settingUsageCalculate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_baseline_settings_24"
-                    android:visibility="visible" />
-            </LinearLayout>
         </LinearLayout>
 
                     <LinearLayout
@@ -136,50 +111,53 @@
                             <Button
                                 android:id="@+id/dataUsageLinearLayoutUsage"
                                 android:layout_width="match_parent"
-                                android:layout_height="70dp"
+                                android:layout_height="60dp"
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="5dp"
                                 android:text="@string/data_usage"
                                 android:textColor="@color/white"
-                                android:textSize="18sp"
+                                android:textSize="15sp"
                                 android:backgroundTint="@color/colorPrimaryDark" />
 
                             <Button
                                 android:id="@+id/appUsageLinearLayoutUsage"
                                 android:layout_width="match_parent"
-                                android:layout_height="70dp"
+                                android:layout_height="60dp"
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="5dp"
-                                android:text="@string/data_usage"
+                                android:text="@string/app_usage"
                                 android:textColor="@color/white"
-                                android:textSize="18sp"
+                                android:textSize="15sp"
                                 android:backgroundTint="@color/colorPrimaryDark" />
 
                             <Button
                                 android:id="@+id/hotspotUsageLinearLayoutUsage"
                                 android:layout_width="match_parent"
-                                android:layout_height="70dp"
+                                android:layout_height="60dp"
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="5dp"
-                                android:text="@string/data_usage"
+                                android:text="@string/hotspot_data_usage"
                                 android:textColor="@color/white"
-                                android:textSize="18sp"
+                                android:textSize="15sp"
                                 android:backgroundTint="@color/colorPrimaryDark" />
 
                             <Button
                                 android:id="@+id/backgroundForegroundUsageLinearLayoutUsage"
                                 android:layout_width="match_parent"
-                                android:layout_height="70dp"
+                                android:layout_height="60dp"
                                 android:layout_marginEnd="10dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginBottom="10dp"
-                                android:text="@string/data_usage"
+                                android:text="@string/foregroundbackgroundusage"
                                 android:textColor="@color/white"
-                                android:textSize="18sp"
+                                android:textSize="15sp"
+                                android:scrollHorizontally="true"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:backgroundTint="@color/colorPrimaryDark" />
                         </LinearLayout>
                     </LinearLayout>

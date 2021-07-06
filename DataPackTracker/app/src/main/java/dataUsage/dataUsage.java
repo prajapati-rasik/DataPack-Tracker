@@ -1,6 +1,7 @@
 package dataUsage;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,8 +33,8 @@ public class dataUsage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.total_data_usage);
-
-        setSupportActionBar((Toolbar) findViewById(R.id.dataUsageToolbar));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.dataUsageToolbar);
+        setSupportActionBar(toolbar);
         ActionBar supportActionBar = getSupportActionBar();
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         if (supportActionBar != null) {
@@ -58,12 +59,7 @@ public class dataUsage extends AppCompatActivity {
         final String[] fragmentTitles = {"TODAY","DAILY","WEEKLY","MONTHLY","YEARLY","TOTAL","CUSTOM"};
         TabLayout tabLayout = findViewById(R.id.dataUsageTabs);
         new TabLayoutMediator(tabLayout, viewPager,
-                new TabLayoutMediator.TabConfigurationStrategy() {
-                    @Override
-                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                        tab.setText(fragmentTitles[position]);
-                    }
-                }
+                (tab, position) -> tab.setText(fragmentTitles[position])
         ).attach();
     }
 
@@ -78,7 +74,16 @@ public class dataUsage extends AppCompatActivity {
         return PermissionChecker.checkUsageAccessPermission(this);
     }
 
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
+        if (menuItem.getItemId() != 16908332) {
+            return super.onOptionsItemSelected(menuItem);
+        }
+        onBackPressed();
+        return true;
     }
 }

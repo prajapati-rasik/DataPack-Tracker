@@ -60,7 +60,6 @@ public class allAppUsage extends AppCompatActivity {
 
     private void setAdapters() {
         try {
-
             SharedPreferences sharedPreferences = getSharedPreferences("MultipleSim", 0);
             this.sharedPreferences = sharedPreferences;
             this.isDualSim = sharedPreferences.getBoolean("isDualSim", false);
@@ -196,6 +195,5 @@ public class allAppUsage extends AppCompatActivity {
         }
         onBackPressed();
         return true;
-
     }
 }

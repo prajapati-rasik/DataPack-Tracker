@@ -23,6 +23,8 @@ public class SubscriberDetails {
     private static boolean isDualSim;
     private static String simIMEI1;
     private static String simIMEI2;
+    private static String simCarrier1;
+    private static String simCarrier2;
     private static SharedPreferences.Editor editor;
 
     @SuppressLint("HardwareIds")
@@ -52,9 +54,11 @@ public class SubscriberDetails {
                         subscriberId1 = telephonyManager.getSubscriberId();
                         if(activeSubscriptionInfoList != null && activeSubscriptionInfoList.size() > 0){
                             simName1 = (String) activeSubscriptionInfoList.get(0).getDisplayName();
+                            simCarrier1 = (String) activeSubscriptionInfoList.get(0).getCarrierName();
                         }
                         editor.putString("subscriberId1",subscriberId1);
                         editor.putString("simName1",simName1);
+                        editor.putString("simCarrier1",simCarrier1);
                     }
                 }else if(activeSubscriptionInfoList == null || activeSubscriptionInfoList.size() <= 1){
                     assert telephonyManager != null;
@@ -62,9 +66,11 @@ public class SubscriberDetails {
                     editor.putBoolean("isDualSim", false);
                     if(activeSubscriptionInfoList != null || activeSubscriptionInfoList.size() > 0){
                         simName1 = (String)activeSubscriptionInfoList.get(0).getDisplayName();
+                        simCarrier1 = (String) activeSubscriptionInfoList.get(0).getCarrierName();
                     }
                     editor.putString("subscriberId1",subscriberId1);
                     editor.putString("simName1",simName1);
+                    editor.putString("simCarrier1",simCarrier1);
                 }else{
                     try {
                         method = Class.forName(telephonyManager.getClass().getName()).getMethod("getSubscriberId", Integer.TYPE);
@@ -78,10 +84,14 @@ public class SubscriberDetails {
                                 subscriberId2 = (String) method.invoke(telephonyManager, activeSubscriptionInfoList.get(1).getSubscriptionId());
                                 simName1 = (String) activeSubscriptionInfoList.get(0).getDisplayName();
                                 simName2 = (String) activeSubscriptionInfoList.get(1).getDisplayName();
+                                simCarrier1 = (String) activeSubscriptionInfoList.get(0).getCarrierName();
+                                simCarrier2 = (String) activeSubscriptionInfoList.get(1).getCarrierName();
                                 editor.putString("subscriberId1", subscriberId1);
                                 editor.putString("subscriberId2", subscriberId2);
                                 editor.putString("simName1", simName1);
                                 editor.putString("simName2", simName2);
+                                editor.putString("simCarrier1",simCarrier1);
+                                editor.putString("simCarrier2",simCarrier2);
                             } catch (IllegalAccessException | InvocationTargetException e) {
                                 e.printStackTrace();
                             }
@@ -91,8 +101,10 @@ public class SubscriberDetails {
                             try {
                                 subscriberId1 = (String) method.invoke(telephonyManager, activeSubscriptionInfoList.get(0).getSubscriptionId());
                                 simName1 = (String) activeSubscriptionInfoList.get(0).getDisplayName();
+                                simCarrier1 = (String) activeSubscriptionInfoList.get(0).getCarrierName();
                                 editor.putString("subscriberId1", subscriberId1);
                                 editor.putString("simName1", simName1);
+                                editor.putString("simCarrier1",simCarrier1);
                                 editor.putBoolean("isDualSim", false);
                             } catch (IllegalAccessException | InvocationTargetException e) {
                                 e.printStackTrace();
@@ -103,8 +115,10 @@ public class SubscriberDetails {
                             try {
                                 subscriberId2 = (String) method.invoke(telephonyManager, activeSubscriptionInfoList.get(1).getSubscriptionId());
                                 simName2 = (String) activeSubscriptionInfoList.get(1).getDisplayName();
+                                simCarrier2 = (String) activeSubscriptionInfoList.get(1).getCarrierName();
                                 editor.putString("subscriberId2", subscriberId2);
                                 editor.putString("simName2", simName2);
+                                editor.putString("simCarrier2",simCarrier2);
                                 editor.putBoolean("isDualSim", false);
                             } catch (IllegalAccessException | InvocationTargetException e) {
                                 e.printStackTrace();
@@ -116,26 +130,30 @@ public class SubscriberDetails {
                 }
                 editor.apply();
             }else{
-                editor.putString("simIMEI1", "");
-                editor.putString("simIMEI2", "");
-                editor.putString("simName1", "");
-                editor.putString("simName2", "");
-                editor.putString("subscriptionId1", "");
-                editor.putString("subscriptionId2", "");
+                editor.putString("simIMEI1", null);
+                editor.putString("simIMEI2", null);
+                editor.putString("simName1", null);
+                editor.putString("simName2", null);
+                editor.putString("subscriptionId1", null);
+                editor.putString("subscriptionId2", null);
                 editor.putBoolean("isSimReady1", false);
                 editor.putBoolean("isSimReady2", false);
                 editor.putBoolean("isDualSim", false);
+                editor.putString("simCarrier1",null);
+                editor.putString("simCarrier2",null);
                 editor.apply();
             }
         }else{
-            editor.putString("simIMEI1", "");
-            editor.putString("simIMEI2", "");
-            editor.putString("simName1", "");
-            editor.putString("simName2", "");
-            editor.putString("subscriptionId1", "");
-            editor.putString("subscriptionId2", "");
+            editor.putString("simIMEI1", null);
+            editor.putString("simIMEI2", null);
+            editor.putString("simName1", null);
+            editor.putString("simName2", null);
+            editor.putString("subscriptionId1", null);
+            editor.putString("subscriptionId2", null);
             editor.putBoolean("isSimReady1", false);
             editor.putBoolean("isSimReady2", false);
+            editor.putString("simCarrier1",null);
+            editor.putString("simCarrier2",null);
             editor.putBoolean("isDualSim", false);
             editor.apply();
         }

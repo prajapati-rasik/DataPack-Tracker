@@ -48,6 +48,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardViewHT"
                     android:layout_width="match_parent"
@@ -89,8 +98,7 @@
                                         android:layout_marginStart="40dp"
                                         android:layout_weight="4"
                                         android:padding="5dp"
-                                        android:text="Received:"
-                                        android:textSize="20sp" />
+                                        android:text="Received:" />
 
                                 <TextView
                                     android:id="@+id/txtReceivedHT"
@@ -100,7 +108,7 @@
                                     android:padding="5dp"
                                     android:layout_weight="6"
                                     android:text="0 MB"
-                                    android:textSize="20sp" />
+                                    />
 
                         </LinearLayout>
 
@@ -124,8 +132,7 @@
                                         android:layout_marginEnd="10dp"
                                         android:layout_weight="4"
                                         android:padding="5dp"
-                                        android:text="Sent:"
-                                        android:textSize="20sp" />
+                                        android:text="Sent:" />
 
                                 <TextView
                                     android:id="@+id/txtSentHT"
@@ -134,8 +141,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="20dp"
                                     android:padding="5dp"
-                                    android:text="0 MB"
-                                    android:textSize="20sp" />
+                                    android:text="0 MB" />
 
                         </LinearLayout>
 
@@ -157,8 +163,7 @@
                                         android:layout_marginEnd="10dp"
                                         android:layout_weight="4"
                                         android:padding="5dp"
-                                        android:text="Total:"
-                                        android:textSize="20sp" />
+                                        android:text="Total:"/>
 
                                 <TextView
                                     android:id="@+id/txtTotalHT"
@@ -167,11 +172,18 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="20dp"
                                     android:padding="5dp"
-                                    android:text="0 MB"
-                                    android:textSize="20sp" />
+                                    android:text="0 MB"/>
                         </LinearLayout>
                     </RelativeLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/PieChartHotspot"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+
+                    </LinearLayout>
+                </ScrollView>
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:id="@+id/dataUsageMProgressBarHT"
