@@ -51,38 +51,41 @@ public class signup_page extends AppCompatActivity {
         confirm = findViewById(R.id.confirm_password1);
         progressBar = findViewById(R.id.progressBar);
         db = FirebaseFirestore.getInstance();
+        Button goToLogin = findViewById(R.id.go_login);
 
-        reg.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String txt_email=email.getText().toString().trim();
-                String txt_pass=pass.getText().toString().trim();
-                fname = first_name.getText().toString().trim();
-                lname = last_name.getText().toString().trim();
-                String confirmpass = confirm.getText().toString().trim();
-                if (TextUtils.isEmpty(txt_email)){
-                    Toast.makeText(signup_page.this,"email is Empty",Toast.LENGTH_SHORT).show();
-                }
-                else if(TextUtils.isEmpty(txt_pass)){
-                    Toast.makeText(signup_page.this,"Please enter password",Toast.LENGTH_LONG).show();
-                }
-                else if(TextUtils.isEmpty(fname)){
-                    Toast.makeText(signup_page.this,"first name is empty",Toast.LENGTH_SHORT).show();
-                }
-                else if(TextUtils.isEmpty(lname)){
-                    Toast.makeText(signup_page.this,"last name is empty",Toast.LENGTH_SHORT).show();
-                }
-                else if(txt_pass.length()<6){
-                    Toast.makeText(signup_page.this,"Password Length is less than 6",Toast.LENGTH_SHORT).show();
-                }
-                else if(!confirmpass.equals(txt_pass)){
-                    Toast.makeText(signup_page.this,"Password doesn't match",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    register_user(txt_email,txt_pass);
-                }
+        goToLogin.setOnClickListener(v -> {
+            startActivity(new Intent(signup_page.this, login_page.class));
+            finish();
+        });
 
+        reg.setOnClickListener(v -> {
+            String txt_email=email.getText().toString().trim();
+            String txt_pass=pass.getText().toString().trim();
+            fname = first_name.getText().toString().trim();
+            lname = last_name.getText().toString().trim();
+            String confirmpass = confirm.getText().toString().trim();
+            if (TextUtils.isEmpty(txt_email)){
+                Toast.makeText(signup_page.this,"email is Empty",Toast.LENGTH_SHORT).show();
             }
+            else if(TextUtils.isEmpty(txt_pass)){
+                Toast.makeText(signup_page.this,"Please enter password",Toast.LENGTH_LONG).show();
+            }
+            else if(TextUtils.isEmpty(fname)){
+                Toast.makeText(signup_page.this,"first name is empty",Toast.LENGTH_SHORT).show();
+            }
+            else if(TextUtils.isEmpty(lname)){
+                Toast.makeText(signup_page.this,"last name is empty",Toast.LENGTH_SHORT).show();
+            }
+            else if(txt_pass.length()<6){
+                Toast.makeText(signup_page.this,"Password Length is less than 6",Toast.LENGTH_SHORT).show();
+            }
+            else if(!confirmpass.equals(txt_pass)){
+                Toast.makeText(signup_page.this,"Password doesn't match",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                register_user(txt_email,txt_pass);
+            }
+
         });
 
     }
@@ -122,24 +125,21 @@ public class signup_page extends AppCompatActivity {
 
         assert user != null;
         user.sendEmailVerification()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseAuth.getInstance().signOut();
-                            Toast.makeText(signup_page.this,"Registering User Successful",Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(signup_page.this, login_page.class));
-                            finish();
-                        }
-                        else
-                        {
-                            overridePendingTransition(0, 0);
-                            Toast.makeText(signup_page.this,"Error while email verification",Toast.LENGTH_SHORT).show();
-                            finish();
-                            overridePendingTransition(0, 0);
-                            startActivity(getIntent());
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseAuth.getInstance().signOut();
+                        Toast.makeText(signup_page.this,"Registering User Successful",Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        startActivity(new Intent(signup_page.this, login_page.class));
+                        finish();
+                    }
+                    else
+                    {
+                        overridePendingTransition(0, 0);
+                        Toast.makeText(signup_page.this,"Error while email verification",Toast.LENGTH_SHORT).show();
+                        finish();
+                        overridePendingTransition(0, 0);
+                        startActivity(getIntent());
                     }
                 });
     }

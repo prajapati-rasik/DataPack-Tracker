@@ -90,7 +90,7 @@ public class login_page extends AppCompatActivity {
         else
         {
             FirebaseAuth.getInstance().signOut();
-            Toast.makeText(login_page.this,"Email not verified",Toast.LENGTH_SHORT).show();
+            Toast.makeText(login_page.this,"Email not verified, check your Mailbox for verification",Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(View.GONE);
         }
     }

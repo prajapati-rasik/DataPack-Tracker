@@ -124,8 +124,9 @@ public class profile extends AppCompatActivity {
             this.ref.document(this.docid).delete().addOnSuccessListener(aVoid -> {
                 this.user.delete().addOnSuccessListener(aVoid1 -> {
                     Toast.makeText(profile.this, "Account Deleted", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(profile.this, MenuPage.class));
-                    finish();
+                    Intent intent = new Intent(profile.this, MenuPage.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }).addOnFailureListener(e -> {
                     Toast.makeText(profile.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
                     if(this.ref.document(this.docid) == null){
